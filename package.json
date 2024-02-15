@@ -1,0 +1,32 @@
+{
+  "name": "expressapi",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./dist/app.js",
+    "nodemon": "nodemon"
+  },
+  "dependencies": {
+    "@prisma/client": "5.9.1",
+    "cookie-parser": "~1.4.6",
+    "express": "~4.16.4",
+    "http-errors": "~1.6.3",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.5.3",
+    "@types/cookie-parser": "^1.4.6",
+    "@types/express": "^4.17.21",
+    "@types/http-errors": "^2.0.4",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^20.11.17",
+    "debug": "~2.6.9",
+    "ejs": "~3.1.9",
+    "morgan": "~1.9.1",
+    "nodemon": "^3.0.3",
+    "prisma": "^5.9.1",
+    "sass": "^1.70.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
