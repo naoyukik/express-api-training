@@ -1,7 +1,9 @@
-import {create} from "../infrastructure/repository/users";
+import { create } from "../infrastructure/repository/users";
 import CreateUserOptions from "../domain/dto/CreateUserOptions";
-import {Users} from "@prisma/client";
+import { Users } from "@prisma/client";
 
-export const createUser = async (createUserCommand: CreateUserOptions): Promise<Users> => {
-  return await create(createUserCommand);
-}
+export const createUser = async (
+	createUserCommand: CreateUserOptions,
+): Promise<Users> => {
+	return await create(createUserCommand);
+};

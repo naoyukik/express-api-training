@@ -1,6 +1,6 @@
 interface CreateUserOptions {
-    name: string;
-    nickname?: string;
+	name: string;
+	nickname?: string;
 }
 
-export default CreateUserOptions
+export default CreateUserOptions;
