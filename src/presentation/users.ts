@@ -17,7 +17,7 @@ router.get("/", (req: Request, res: Response, next: NextFunction) => {
 });
 
 /**
- * 新しいユーザーの作成
+ * Create new user
  */
 router.post("/", async (req: Request, res: Response) => {
   const postBody = req.body;
@@ -30,7 +30,7 @@ router.post("/", async (req: Request, res: Response) => {
 });
 
 /**
- * ユーザー情報の更新
+ * Update user data
  */
 router.put("/", async (req: Request, res: Response) => {
   const postBody = req.body;
@@ -44,7 +44,7 @@ router.put("/", async (req: Request, res: Response) => {
 });
 
 /**
- * ユーザー情報の確認
+ * Get user data
  */
 router.get("/", async (req: Request, res: Response) => {
   const readUserCommand: ReadUserOptions = req.query;
@@ -53,7 +53,7 @@ router.get("/", async (req: Request, res: Response) => {
 });
 
 /**
- *
+ * Delete user data
  */
 router.delete("/:id", async (req: Request, res: Response) => {
   const deleteUserCommand: DeleteUserOptions = { id: req.params.id };
