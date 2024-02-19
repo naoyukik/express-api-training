@@ -1,10 +1,10 @@
 import express, { Request, Response, NextFunction } from "express";
-import {createUser, deleteUser, readUser, updateUser} from "../application/userService";
+import { createUser, deleteUser, readUser, updateUser } from "../application/userService";
 import {
   CreateUserOptions,
   DeleteUserOptions,
   ReadUserOptions,
-  UpdateUserOptions
+  UpdateUserOptions,
 } from "../domain/dto/CreateUserOptions";
 import { Users } from "@prisma/client";
 const router = express.Router();
@@ -13,22 +13,21 @@ router.use(express.json());
 
 /* GET users listing. */
 router.get("/", (req: Request, res: Response, next: NextFunction) => {
-	res.send("respond with a resource");
+  res.send("respond with a resource");
 });
 
 /**
  * 新しいユーザーの作成
  */
 router.post("/", async (req: Request, res: Response) => {
-	const postBody = req.body;
-	const createUserCommand: CreateUserOptions = {
-		name: postBody.name,
-		nickname: postBody.nickname,
-	};
-	const result: Users = await createUser(createUserCommand);
-	res.json(result);
+  const postBody = req.body;
+  const createUserCommand: CreateUserOptions = {
+    name: postBody.name,
+    nickname: postBody.nickname,
+  };
+  const result: Users = await createUser(createUserCommand);
+  res.json(result);
 });
-
 
 /**
  * ユーザー情報の更新

@@ -1,5 +1,5 @@
 interface HelloOptions {
-	name: string;
+  name: string;
 }
 
 export default HelloOptions;

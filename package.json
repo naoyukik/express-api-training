@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon"
+    "start": "nodemon",
+    "lint": "pnpm dlx @biomejs/biome lint ./src/*",
+    "format": "pnpm dlx @biomejs/biome format --write ./src"
   },
   "dependencies": {
     "@prisma/client": "5.9.1",

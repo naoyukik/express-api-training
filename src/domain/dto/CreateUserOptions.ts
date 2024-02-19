@@ -1,6 +1,6 @@
 export interface CreateUserOptions {
-	name: string;
-	nickname?: string;
+  name: string;
+  nickname?: string;
 }
 
 export interface UpdateUserOptions {

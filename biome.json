@@ -11,5 +11,10 @@
 		"rules": {
 			"recommended": true
 		}
-	}
+	},
+  "formatter": {
+    "indentStyle": "space",
+    "lineWidth": 120,
+    "lineEnding": "lf"
+  }
 }
