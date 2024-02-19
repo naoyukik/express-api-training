@@ -8,12 +8,21 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/users
+PUT http://localhost:3000/users
 Content-Type: application/json
 
 {
-  "name": "John"
+  "id": "clsn97pdu0000l9aeq1wha7az",
+  "name": "ham"
 }
+
+###
+GET http://localhost:3000/users?id=clsn97pdu0000l9aeq1wha7az
+Content-Type: application/json
+
+###
+DELETE http://localhost:3000/users/clsn97pdu0000l9aeq1wha7az
+Content-Type: application/json
 
 ###
 GET http://localhost:3000/

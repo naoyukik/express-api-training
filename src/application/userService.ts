@@ -1,5 +1,10 @@
-import { create } from "../infrastructure/repository/users";
-import CreateUserOptions from "../domain/dto/CreateUserOptions";
+import {create, fetch, remove, update} from "../infrastructure/repository/users";
+import {
+  CreateUserOptions,
+  DeleteUserOptions,
+  ReadUserOptions,
+  UpdateUserOptions
+} from "../domain/dto/CreateUserOptions";
 import { Users } from "@prisma/client";
 
 export const createUser = async (
@@ -7,3 +12,21 @@ export const createUser = async (
 ): Promise<Users> => {
 	return await create(createUserCommand);
 };
+
+export const updateUser = async (
+  putUserCommand: UpdateUserOptions
+): Promise<Users> => {
+  return await update(putUserCommand);
+}
+
+export const readUser = async (
+  readUserCommand: ReadUserOptions
+): Promise<Users | null> => {
+  return await fetch(readUserCommand);
+}
+
+export const deleteUser = async (
+  deleteUserCommand: DeleteUserOptions
+): Promise<Users> => {
+  return await remove(deleteUserCommand);
+}

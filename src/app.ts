@@ -23,12 +23,12 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function (req: Request, res: Response, next: NextFunction) {
+app.use((req: Request, res: Response, next: NextFunction) => {
 	next(createError(404));
 });
 
 // error handler
-app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 	// set locals, only providing error in development
 	res.locals.message = err.message;
 	res.locals.error = req.app.get("env") === "development" ? err : {};
@@ -38,7 +38,7 @@ app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
 	res.render("error");
 });
 
-app.listen(PORT, function () {
+app.listen(PORT, () => {
 	console.log(`Server is running in http://localhost:${PORT}`);
 });
 
