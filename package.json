@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "start": "nodemon",
-    "lint": "npx @biomejs/biome lint ./src/*",
+    "lint": "npx @biomejs/biome lint ./src",
     "format": "npx @biomejs/biome format --write ./src",
-    "lint:pnpm": "pnpm dlx @biomejs/biome lint ./src/*",
+    "lint:pnpm": "pnpm dlx @biomejs/biome lint ./src",
     "format:pnpm": "pnpm dlx @biomejs/biome format --write ./src"
   },
   "dependencies": {
