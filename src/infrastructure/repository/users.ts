@@ -19,12 +19,12 @@ export const create: UsersRepository["create"] = async (param: CreateUserOptions
 };
 
 export const update: UsersRepository["update"] = async (param: UpdateUserOptions): Promise<Users> => {
-  const user: Prisma.UsersUpdateArgs = {
+  const where: Prisma.UsersUpdateArgs = {
     where: { id: param.id },
     data: { name: param.name, nickname: param.nickname },
   };
 
-  return prisma.users.update(user);
+  return prisma.users.update(where);
 };
 
 export const fetch: UsersRepository["fetch"] = async (param: ReadUserOptions): Promise<Users | null> => {
@@ -40,9 +40,9 @@ export const fetch: UsersRepository["fetch"] = async (param: ReadUserOptions): P
 };
 
 export const remove: UsersRepository["delete"] = async (param: DeleteUserOptions): Promise<Users> => {
-  const deleted: Prisma.UsersDeleteArgs = {
+  const where: Prisma.UsersDeleteArgs = {
     where: { id: param.id },
   };
 
-  return prisma.users.delete(deleted);
+  return prisma.users.delete(where);
 };
