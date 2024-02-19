@@ -28,6 +28,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 // error handler
+// biome-ignore lint: allow any
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
