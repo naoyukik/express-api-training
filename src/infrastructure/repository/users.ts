@@ -6,6 +6,7 @@ import {
   UpdateUserOptions,
 } from "../../domain/dto/CreateUserOptions";
 import { UsersRepository } from "../../domain/repository/UsersRepository";
+import { UserNotFound } from "../../domain/exception/UserNotFound";
 
 const prisma = new PrismaClient();
 
@@ -44,5 +45,13 @@ export const remove: UsersRepository["delete"] = async (param: DeleteUserOptions
     where: { id: param.id },
   };
 
-  return prisma.users.delete(where);
+  try {
+    const deleteUserResult: Users = await prisma.users.delete(where);
+    return deleteUserResult;
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      throw new UserNotFound();
+    }
+    throw error;
+  }
 };

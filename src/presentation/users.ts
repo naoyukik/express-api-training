@@ -57,8 +57,15 @@ router.get("/", async (req: Request, res: Response) => {
  */
 router.delete("/:id", async (req: Request, res: Response) => {
   const deleteUserCommand: DeleteUserOptions = { id: req.params.id };
-  const result: Users | null = await deleteUser(deleteUserCommand);
-  res.json(result);
+  try {
+    const result: Users = await deleteUser(deleteUserCommand);
+    const response: SuccessResponse<Users> = toSuccessResponse(result);
+    res.json(response);
+  } catch (error) {
+    if (error instanceof Error) {
+      res.json(toErrorResponse(error));
+    }
+  }
 });
 
 export default router;
