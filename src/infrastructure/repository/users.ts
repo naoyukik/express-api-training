@@ -24,11 +24,18 @@ export const update: UsersRepository["update"] = async (param: UpdateUserOptions
     where: { id: param.id },
     data: { name: param.name, nickname: param.nickname },
   };
-
-  return prisma.users.update(where);
+  try {
+    return await prisma.users.update(where);
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      throw new UserNotFound();
+    }
+    console.error(error);
+    throw error;
+  }
 };
 
-export const fetch: UsersRepository["fetch"] = async (param: ReadUserOptions): Promise<Users | null> => {
+export const fetch: UsersRepository["fetch"] = async (param: ReadUserOptions): Promise<Users> => {
   const where: Prisma.UsersFindUniqueArgs = {
     where: {
       id: param.id,
@@ -37,7 +44,9 @@ export const fetch: UsersRepository["fetch"] = async (param: ReadUserOptions): P
     },
   };
 
-  return prisma.users.findUnique(where);
+  const result: Users | null = await prisma.users.findUnique(where);
+  if (result === null) throw new UserNotFound();
+  return result;
 };
 
 export const remove: UsersRepository["delete"] = async (param: DeleteUserOptions): Promise<Users> => {

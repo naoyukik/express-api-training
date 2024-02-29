@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import { createUser, deleteUser, readUser, updateUser } from "../application/userService";
 import {
   CreateUserOptions,
@@ -7,14 +7,12 @@ import {
   UpdateUserOptions,
 } from "../domain/dto/CreateUserOptions";
 import { Users } from "@prisma/client";
+import { SuccessResponse } from "./dto/ErrorResponse";
+import { toErrorResponse, toSuccessResponse } from "./responseHandler";
+
 const router = express.Router();
 
 router.use(express.json());
-
-/* GET users listing. */
-router.get("/", (req: Request, res: Response, next: NextFunction) => {
-  res.send("respond with a resource");
-});
 
 /**
  * Create new user
@@ -25,8 +23,14 @@ router.post("/", async (req: Request, res: Response) => {
     name: postBody.name,
     nickname: postBody.nickname,
   };
-  const result: Users = await createUser(createUserCommand);
-  res.json(result);
+  try {
+    const result: Users = await createUser(createUserCommand);
+    res.json(result);
+  } catch (error) {
+    if (error instanceof Error) {
+      res.json(toErrorResponse(error));
+    }
+  }
 });
 
 /**
@@ -39,8 +43,14 @@ router.put("/", async (req: Request, res: Response) => {
     name: postBody.name,
     nickname: postBody.nickname,
   };
-  const result: Users = await updateUser(updateUserCommand);
-  res.json(result);
+  try {
+    const result: Users = await updateUser(updateUserCommand);
+    res.json(result);
+  } catch (error) {
+    if (error instanceof Error) {
+      res.json(toErrorResponse(error));
+    }
+  }
 });
 
 /**
@@ -48,8 +58,14 @@ router.put("/", async (req: Request, res: Response) => {
  */
 router.get("/", async (req: Request, res: Response) => {
   const readUserCommand: ReadUserOptions = req.query;
-  const result: Users | null = await readUser(readUserCommand);
-  res.json(result);
+  try {
+    const result: Users | null = await readUser(readUserCommand);
+    res.json(result);
+  } catch (error) {
+    if (error instanceof Error) {
+      res.json(toErrorResponse(error));
+    }
+  }
 });
 
 /**
