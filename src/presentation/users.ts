@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from "express";
+import express, { Request, Response } from "express";
 import { createUser, deleteUser, readUser, updateUser } from "../application/userService";
 import {
   CreateUserOptions,
@@ -7,14 +7,11 @@ import {
   UpdateUserOptions,
 } from "../domain/dto/CreateUserOptions";
 import { Users } from "@prisma/client";
+import { sendErrorResponse, sendSuccessResponse } from "./responseHandler";
+
 const router = express.Router();
 
 router.use(express.json());
-
-/* GET users listing. */
-router.get("/", (req: Request, res: Response, next: NextFunction) => {
-  res.send("respond with a resource");
-});
 
 /**
  * Create new user
@@ -25,8 +22,14 @@ router.post("/", async (req: Request, res: Response) => {
     name: postBody.name,
     nickname: postBody.nickname,
   };
-  const result: Users = await createUser(createUserCommand);
-  res.json(result);
+  try {
+    const result: Users = await createUser(createUserCommand);
+    sendSuccessResponse(res, result);
+  } catch (error) {
+    if (error instanceof Error) {
+      sendErrorResponse(res, error);
+    }
+  }
 });
 
 /**
@@ -39,8 +42,14 @@ router.put("/", async (req: Request, res: Response) => {
     name: postBody.name,
     nickname: postBody.nickname,
   };
-  const result: Users = await updateUser(updateUserCommand);
-  res.json(result);
+  try {
+    const result: Users = await updateUser(updateUserCommand);
+    sendSuccessResponse(res, result);
+  } catch (error) {
+    if (error instanceof Error) {
+      sendErrorResponse(res, error);
+    }
+  }
 });
 
 /**
@@ -48,8 +57,14 @@ router.put("/", async (req: Request, res: Response) => {
  */
 router.get("/", async (req: Request, res: Response) => {
   const readUserCommand: ReadUserOptions = req.query;
-  const result: Users | null = await readUser(readUserCommand);
-  res.json(result);
+  try {
+    const result: Users | null = await readUser(readUserCommand);
+    sendSuccessResponse(res, result);
+  } catch (error) {
+    if (error instanceof Error) {
+      sendErrorResponse(res, error);
+    }
+  }
 });
 
 /**
@@ -57,8 +72,14 @@ router.get("/", async (req: Request, res: Response) => {
  */
 router.delete("/:id", async (req: Request, res: Response) => {
   const deleteUserCommand: DeleteUserOptions = { id: req.params.id };
-  const result: Users | null = await deleteUser(deleteUserCommand);
-  res.json(result);
+  try {
+    const result: Users = await deleteUser(deleteUserCommand);
+    sendSuccessResponse(res, result);
+  } catch (error) {
+    if (error instanceof Error) {
+      sendErrorResponse(res, error);
+    }
+  }
 });
 
 export default router;

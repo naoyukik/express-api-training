@@ -1,7 +1,7 @@
-import createError from "http-errors";
-import express, { NextFunction, Request, Response } from "express";
 import path from "path";
 import cookieParser from "cookie-parser";
+import express, { NextFunction, Request, Response } from "express";
+import createError from "http-errors";
 import logger from "morgan";
 import indexRouter from "./presentation";
 import usersRouter from "./presentation/users";
