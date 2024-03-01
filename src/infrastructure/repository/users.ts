@@ -5,8 +5,8 @@ import {
   ReadUserOptions,
   UpdateUserOptions,
 } from "../../domain/dto/CreateUserOptions";
-import { UsersRepository } from "../../domain/repository/UsersRepository";
 import { UserNotFound } from "../../domain/exception/UserNotFound";
+import { UsersRepository } from "../../domain/repository/UsersRepository";
 
 const prisma = new PrismaClient();
 

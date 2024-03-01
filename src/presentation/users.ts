@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response } from "express";
+import express, { Request, Response } from "express";
 import { createUser, deleteUser, readUser, updateUser } from "../application/userService";
 import {
   CreateUserOptions,
@@ -7,8 +7,7 @@ import {
   UpdateUserOptions,
 } from "../domain/dto/CreateUserOptions";
 import { Users } from "@prisma/client";
-import { SuccessResponse } from "./dto/ErrorResponse";
-import { toErrorResponse, toSuccessResponse } from "./responseHandler";
+import { sendErrorResponse, sendSuccessResponse } from "./responseHandler";
 
 const router = express.Router();
 
