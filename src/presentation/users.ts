@@ -25,10 +25,10 @@ router.post("/", async (req: Request, res: Response) => {
   };
   try {
     const result: Users = await createUser(createUserCommand);
-    res.json(result);
+    sendSuccessResponse(res, result);
   } catch (error) {
     if (error instanceof Error) {
-      res.json(toErrorResponse(error));
+      sendErrorResponse(res, error);
     }
   }
 });
@@ -45,10 +45,10 @@ router.put("/", async (req: Request, res: Response) => {
   };
   try {
     const result: Users = await updateUser(updateUserCommand);
-    res.json(result);
+    sendSuccessResponse(res, result);
   } catch (error) {
     if (error instanceof Error) {
-      res.json(toErrorResponse(error));
+      sendErrorResponse(res, error);
     }
   }
 });
@@ -60,10 +60,10 @@ router.get("/", async (req: Request, res: Response) => {
   const readUserCommand: ReadUserOptions = req.query;
   try {
     const result: Users | null = await readUser(readUserCommand);
-    res.json(result);
+    sendSuccessResponse(res, result);
   } catch (error) {
     if (error instanceof Error) {
-      res.json(toErrorResponse(error));
+      sendErrorResponse(res, error);
     }
   }
 });
@@ -75,11 +75,10 @@ router.delete("/:id", async (req: Request, res: Response) => {
   const deleteUserCommand: DeleteUserOptions = { id: req.params.id };
   try {
     const result: Users = await deleteUser(deleteUserCommand);
-    const response: SuccessResponse<Users> = toSuccessResponse(result);
-    res.json(response);
+    sendSuccessResponse(res, result);
   } catch (error) {
     if (error instanceof Error) {
-      res.json(toErrorResponse(error));
+      sendErrorResponse(res, error);
     }
   }
 });
