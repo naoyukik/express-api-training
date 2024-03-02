@@ -5,7 +5,6 @@ import {
   ReadUserOptions,
   UpdateUserOptions,
 } from "../../domain/dto/CreateUserOptions";
-import { UserNotFound } from "../../domain/exception/UserNotFound";
 import { UsersRepository } from "../../domain/repository/UsersRepository";
 
 const prisma = new PrismaClient();
@@ -24,18 +23,11 @@ export const update: UsersRepository["update"] = async (param: UpdateUserOptions
     where: { id: param.id },
     data: { name: param.name, nickname: param.nickname },
   };
-  try {
-    return await prisma.users.update(where);
-  } catch (error) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      throw new UserNotFound();
-    }
-    console.error(error);
-    throw error;
-  }
+
+  return prisma.users.update(where);
 };
 
-export const fetch: UsersRepository["fetch"] = async (param: ReadUserOptions): Promise<Users> => {
+export const fetch: UsersRepository["fetch"] = async (param: ReadUserOptions): Promise<Users | null> => {
   const where: Prisma.UsersFindUniqueArgs = {
     where: {
       id: param.id,
@@ -44,9 +36,7 @@ export const fetch: UsersRepository["fetch"] = async (param: ReadUserOptions): P
     },
   };
 
-  const result: Users | null = await prisma.users.findUnique(where);
-  if (result === null) throw new UserNotFound();
-  return result;
+  return prisma.users.findUnique(where);
 };
 
 export const remove: UsersRepository["delete"] = async (param: DeleteUserOptions): Promise<Users> => {
@@ -54,13 +44,5 @@ export const remove: UsersRepository["delete"] = async (param: DeleteUserOptions
     where: { id: param.id },
   };
 
-  try {
-    const deleteUserResult: Users = await prisma.users.delete(where);
-    return deleteUserResult;
-  } catch (error) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      throw new UserNotFound();
-    }
-    throw error;
-  }
+  return prisma.users.delete(where);
 };

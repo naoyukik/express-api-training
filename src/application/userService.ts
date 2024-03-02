@@ -1,11 +1,11 @@
-import { Users } from "@prisma/client";
+import { create, fetch, remove, update } from "../infrastructure/repository/users";
 import {
   CreateUserOptions,
   DeleteUserOptions,
   ReadUserOptions,
   UpdateUserOptions,
 } from "../domain/dto/CreateUserOptions";
-import { create, fetch, remove, update } from "../infrastructure/repository/users";
+import { Users } from "@prisma/client";
 
 export const createUser = async (createUserCommand: CreateUserOptions): Promise<Users> => {
   return await create(createUserCommand);
