@@ -1,6 +1,6 @@
-name: Check fixup in commit messages
+name: Danger check
 
-on: [ push, pull_request ]
+on: pull_request
 
 jobs:
   build:
@@ -20,4 +20,5 @@ jobs:
       - name: Run Danger
         run: npx danger ci
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DANGER_DISABLE_TRANSPILATION: true
