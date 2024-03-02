@@ -1,6 +1,6 @@
 # express API sample
 
-## デプロイ
+## Deploy
 ```shell
 cp ./.env.example ./.env
 npm i
