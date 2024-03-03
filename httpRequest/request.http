@@ -1,4 +1,4 @@
-###
+### 1. ユーザー作成
 POST http://localhost:3000/users
 Content-Type: application/json
 
@@ -7,7 +7,7 @@ Content-Type: application/json
   "nickname": "do"
 }
 
-###
+### 2. ユーザー情報の書き換え
 PUT http://localhost:3000/users
 Content-Type: application/json
 
@@ -16,14 +16,10 @@ Content-Type: application/json
   "name": "ham"
 }
 
-###
+### 3. ユーザー情報の取得
 GET http://localhost:3000/users?id=clsn97pdu0000l9aeq1wha7az
 Content-Type: application/json
 
-###
+### 4. ユーザー削除
 DELETE http://localhost:3000/users/clsn97pdu0000l9aeq1wha7az
-Content-Type: application/json
-
-###
-GET http://localhost:3000/
 Content-Type: application/json
